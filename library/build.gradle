@@ -25,5 +25,30 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
         }
     }
+}
 
+apply plugin: 'maven'
+
+version = "1.0"
+group = "com.locatify.lib"
+
+configurations {
+    archives {
+        extendsFrom configurations.default
+    }
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        repository(url: localRepo)
+
+        pom.project {
+            name 'PinnedSectionListView'
+            packaging 'aar'
+            description 'Pinned Section ListView for Locatify Apps'
+            url 'https://github.com/jackfengji/pinned-section-listview'
+            artifactId 'pinned-section-listview'
+        }
+    }
 }
